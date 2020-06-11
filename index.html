@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://git.b5k.io/fsbs/go-mlm/pulls/240 -->
+<html lang="zh-TW"><head data-suburl=""><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>#240 - feat(odds): flag apis swagger -  go-mlm - Gitea: Git with a cup of tea</title>
+	<link rel="manifest" href="https://git.b5k.io/manifest.json" crossorigin="use-credentials">
+
+	<script>
+		if ('serviceWorker' in navigator) {
+  			window.addEventListener('load', function() {
+    			navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+      				
+      				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+					
+      				console.log('ServiceWorker registration failed: ', err);
+    			});
+  			});
+		}
+
+	</script>
+
+	<meta name="theme-color" content="#6cc644">
+	<meta name="author" content="fsbs">
+	<meta name="description" content="go-mlm - 代理管理系統">
+	<meta name="keywords" content="go,git,self-hosted,gitea">
+	<meta name="referrer" content="no-referrer">
+	<meta name="_csrf" content="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+	<meta name="_suburl" content="">
+	
+		<meta name="_uid" content="38">
+	
+	
+	
+
+
+	<script>
+	/*
+	@licstart  The following is the entire license notice for the
+        JavaScript code in this page.
+
+	Copyright (c) 2016 The Gitea Authors
+	Copyright (c) 2015 The Gogs Authors
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+	---
+	Licensing information for additional javascript libraries can be found at:
+	  {{AppSubUrl}}/vendor/librejs.html
+
+	@licend  The above is the entire license notice
+        for the JavaScript code in this page.
+	*/
+	</script>
+
+	<link rel="shortcut icon" href="https://git.b5k.io/img/favicon.png">
+	<link rel="mask-icon" href="https://git.b5k.io/img/gitea-safari.svg" color="#609926">
+	<link rel="stylesheet" href="./index/font-awesome.min.css" as="style" onload="this.rel=&#39;stylesheet&#39;">
+	<noscript><link rel="stylesheet" href="/vendor/assets/font-awesome/css/font-awesome.min.css"></noscript>
+	<link rel="stylesheet" href="./index/octicons.min.css">
+
+
+
+
+
+
+	<link rel="stylesheet" href="./index/tribute.css">
+
+
+	
+	<link rel="stylesheet" href="./index/semantic.min.css">
+	<link rel="stylesheet" href="./index/index.css">
+	<noscript>
+		<style>
+			.dropdown:hover > .menu { display: block; }
+			.ui.secondary.menu .dropdown.item > .menu { margin-top: 0; }
+		</style>
+	</noscript>
+
+
+	<link rel="stylesheet" href="./index/github.css">
+
+
+
+
+	<link rel="stylesheet" href="./index/dropzone.css">
+
+
+	<style class="list-search-style"></style>
+
+	<script src="./index/polyfill.min.js.下載"></script>
+	<script src="./index/loadCSS.min.js.下載"></script>
+	<script src="./index/cssrelpreload.min.js.下載"></script>
+
+	<meta property="og:title" content="go-mlm">
+	<meta property="og:type" content="object">
+	<meta property="og:image" content="https://git.b5k.io/img/avatar_default.png">
+	<meta property="og:url" content="https://git.b5k.io/fsbs/go-mlm">
+	
+	<meta property="og:description" content="代理管理系統">
+	
+	<meta property="og:site_name" content="Gitea: Git with a cup of tea">
+
+
+	
+
+
+</head>
+<body data-gr-c-s-loaded="true">
+	
+
+	<div class="full height">
+		<noscript>本網站在啟用 JavaScript 的情況下可以運作的更好。</noscript>
+
+		
+
+		
+			<div class="ui top secondary stackable main menu following bar light">
+				<div class="ui container" id="navbar">
+	<div class="item brand" style="justify-content: space-between;">
+		<a href="https://git.b5k.io/">
+			<img class="ui mini image" src="./index/gitea-sm.png">
+		</a>
+		<div class="ui basic icon button mobile-only" id="navbar-expand-toggle">
+			<i class="sidebar icon"></i>
+		</div>
+	</div>
+
+	
+		<a class="item " href="https://git.b5k.io/">控制面版</a>
+		<a class="item " href="https://git.b5k.io/issues">問題</a>
+		<a class="item " href="https://git.b5k.io/pulls">合併請求</a>
+		<a class="item " href="https://git.b5k.io/explore/repos">探索</a>
+	
+
+	
+
+	
+
+	
+		<div class="right stackable menu">
+			<a href="https://git.b5k.io/notifications" class="item poping up" data-content="訊息" data-variation="tiny inverted">
+				<span class="text">
+					<i class="fitted octicon octicon-bell"></i>
+					<span class="sr-mobile-only">訊息</span>
+
+					
+						<span class="ui red label">
+							327
+						</span>
+					
+				</span>
+			</a>
+
+			<div class="ui dropdown jump item poping up" data-content="建立..." data-variation="tiny inverted" tabindex="0">
+				<span class="text">
+					<i class="fitted octicon octicon-plus"></i>
+					<span class="sr-mobile-only">建立...</span>
+					<i class="fitted octicon octicon-triangle-down not-mobile"></i>
+				</span>
+				<div class="menu" tabindex="-1">
+					<a class="item" href="https://git.b5k.io/repo/create">
+						<i class="octicon octicon-plus"></i> 新增儲存庫
+					</a>
+					<a class="item" href="https://git.b5k.io/repo/migrate">
+						<i class="octicon octicon-repo-clone"></i> 遷移外部儲存庫
+					</a>
+					
+					<a class="item" href="https://git.b5k.io/org/create">
+						<i class="octicon octicon-organization"></i> 新增組織
+					</a>
+					
+				</div>
+			</div>
+
+			<div class="ui dropdown jump item poping up" data-content="設定檔和設置..." data-variation="tiny inverted" tabindex="0">
+				<span class="text">
+					<img class="ui tiny avatar image" src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+					<span class="sr-only">設定檔和設置...</span>
+					<span class="mobile-only">dave.gam</span>
+					<i class="fitted octicon octicon-triangle-down not-mobile" tabindex="-1"></i>
+				</span>
+				<div class="menu user-menu" tabindex="-1">
+					<div class="ui header">
+						已登入用戶 <strong>dave.gam</strong>
+					</div>
+
+					<div class="divider"></div>
+					<a class="item" href="https://git.b5k.io/dave.gam">
+						<i class="octicon octicon-person"></i>
+						個人訊息
+					</a>
+					<a class="item" href="https://git.b5k.io/dave.gam?tab=stars">
+						<i class="octicon octicon-star"></i>
+						標記星號
+					</a>
+					<a class=" item" href="https://git.b5k.io/user/settings">
+						<i class="octicon octicon-settings"></i>
+						設定
+					</a>
+					<a class="item" target="_blank" rel="noopener noreferrer" href="https://docs.gitea.io/">
+						<i class="octicon octicon-question"></i>
+						說明
+					</a>
+					
+
+					<div class="divider"></div>
+					<a class="item" href="https://git.b5k.io/user/logout">
+						<i class="octicon octicon-sign-out"></i>
+						登出
+					</a>
+				</div>
+			</div>
+		</div>
+
+	
+</div>
+
+			</div>
+		
+
+
+<div class="repository view issue pull">
+	<div class="header-wrapper">
+
+	<div class="ui container">
+		<div class="repo-header">
+			<div class="ui huge breadcrumb repo-title">
+				
+				<i class="mega-octicon octicon-lock"></i>
+				
+				<a href="https://git.b5k.io/fsbs">fsbs</a>
+				<div class="divider"> / </div>
+				<a href="https://git.b5k.io/fsbs/go-mlm">go-mlm</a>
+				
+				
+				
+			</div>
+			<div class="repo-buttons">
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="https://git.b5k.io/fsbs/go-mlm/action/unwatch?redirect_to=%2ffsbs%2fgo-mlm%2fpulls%2f240">
+						<i class="icon fa-eye"></i>取消關注
+					</a>
+					<a class="ui basic label" href="https://git.b5k.io/fsbs/go-mlm/watchers">
+						10
+					</a>
+				</div>
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="https://git.b5k.io/fsbs/go-mlm/action/star?redirect_to=%2ffsbs%2fgo-mlm%2fpulls%2f240">
+						<i class="icon star outline"></i>收藏
+					</a>
+					<a class="ui basic label" href="https://git.b5k.io/fsbs/go-mlm/stars">
+						0
+					</a>
+				</div>
+				
+					<div class="ui labeled button " tabindex="0">
+						<a class="ui compact basic button " href="https://git.b5k.io/repo/fork/7" data-position="top center" data-variation="tiny">
+							<i class="octicon octicon-repo-forked"></i>複製
+						</a>
+						<a class="ui basic label" href="https://git.b5k.io/fsbs/go-mlm/forks">
+							0
+						</a>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<div class="ui tabs container">
+		<div class="ui tabular stackable menu navbar">
+			
+			<a class=" item" href="https://git.b5k.io/fsbs/go-mlm">
+				<i class="octicon octicon-code"></i> 程式碼
+			</a>
+			
+
+			
+				<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/issues">
+					<i class="octicon octicon-issue-opened"></i> 問題 <span class="ui blue small label">2</span>
+				</a>
+			
+
+			
+
+			
+				<a class="active item" href="https://git.b5k.io/fsbs/go-mlm/pulls">
+					<i class="octicon octicon-git-pull-request"></i> 合併請求 <span class="ui gray small label">0</span>
+				</a>
+			
+
+			
+			<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/releases">
+				<i class="octicon octicon-tag"></i> 版本發佈 <span class="ui blue small label">44</span>
+			</a>
+			
+
+			
+				<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/wiki">
+					<i class="octicon octicon-book"></i> Wiki
+				</a>
+			
+
+			
+				<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/activity">
+					<i class="octicon octicon-pulse"></i> 活動
+				</a>
+			
+
+			
+
+			
+		</div>
+	</div>
+	<div class="ui tabs divider"></div>
+
+</div>
+
+	<div class="ui container">
+		<div class="ui two column stackable grid">
+			<div class="column">
+				<div class="ui compact left small menu">
+	<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/labels">標籤</a>
+	<a class=" item" href="https://git.b5k.io/fsbs/go-mlm/milestones">里程碑</a>
+</div>
+
+			</div>
+			
+				<div class="column right aligned">
+					
+						<a class="ui green button " href="https://git.b5k.io/fsbs/go-mlm/compare/master...master">建立合併請求</a>
+					
+				</div>
+			
+		</div>
+		<div class="ui divider"></div>
+		
+			<div class="sixteen wide column title">
+	<div class="ui grid">
+		<h1 class="twelve wide column">
+			<span class="index">#240</span> <span id="issue-title" class="has-emoji">feat(odds): flag apis swagger</span>
+			<div id="edit-title-input" class="ui input" style="display: none">
+				<input value="feat(odds): flag apis swagger">
+			</div>
+		</h1>
+		
+			<div class="four wide column">
+				<div class="edit-zone text right">
+					<div id="edit-title" class="ui basic green not-in-edit button">編輯</div>
+					<div id="cancel-edit-title" class="ui basic blue in-edit button" style="display: none">取消</div>
+					<div id="save-edit-title" class="ui green in-edit button" style="display: none" data-update-url="/fsbs/go-mlm/issues/240/title">儲存</div>
+				</div>
+			</div>
+		
+	</div>
+	
+		<div class="ui purple large label"><i class="octicon octicon-git-pull-request"></i> 已合併</div>
+	
+
+	
+		
+			
+			<a href="https://git.b5k.io/dave.gam">dave.gam</a>
+			<span class="pull-desc">於 <span>3 週之前</span> 將 7 次代碼提交從 <code>feature/mlm_user_flags_swagger</code>合併至 <code>develop</code></span>
+		
+	
+	<div class="ui divider"></div>
+</div>
+
+			<div class="ui top attached pull tabular stackable menu">
+	<a class="item active" href="https://git.b5k.io/fsbs/go-mlm/pulls/240">
+		<span class="octicon octicon-comment-discussion"></span>
+		對話內容
+		<span class="ui gray small label">0</span>
+	</a>
+	<a class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240/commits">
+		<span class="octicon octicon-git-commit"></span>
+		程式碼提交
+		<span class="ui blue small label">7</span>
+	</a>
+	<a class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240/files">
+		<span class="octicon octicon-diff"></span>
+		檔案變動
+		<span class="ui blue small label">5</span>
+	</a>
+</div>
+
+			<div class="ui bottom attached tab pull segment active" data-tab="request-">
+				<div class="ui stackable grid">
+	
+	
+
+	
+	<div class="twelve wide column comment-list prevent-before-timeline">
+		<ui class="ui comments timeline-line">
+			<div class="comment">
+				<a class="avatar" href="https://git.b5k.io/dave.gam">
+					<img src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+				</a>
+				<div class="content">
+					<div class="ui top attached header">
+						<span class="text grey"><a href="https://git.b5k.io/dave.gam">dave.gam</a>  評論 <a href="https://git.b5k.io/fsbs/go-mlm/pulls/240#issue-1526"> <span class="time-since poping up" title="" data-content="2020/5/17 下午11:24:49" data-variation="inverted tiny">3 週之前</span></a></span>
+						
+							<div class="ui right actions">
+								
+<div class="item action ui pointing top right select-reaction dropdown" data-action-url="/fsbs/go-mlm/issues/240/reactions" tabindex="0">
+	<a class="add-reaction">
+		<i class="octicon octicon-plus-small" style="width: 10px"></i>
+		<i class="octicon octicon-smiley"></i>
+	</a>
+	<div class="menu has-emoji" tabindex="-1">
+		<div class="header">選擇你的表情反應</div>
+		<div class="divider"></div>
+		<div class="item" data-content="+1"><img align="absmiddle" alt=":thumbsup:" class="emoji" src="./index/thumbsup.png" title=":thumbsup:"></img></div>
+		<div class="item" data-content="-1"><img align="absmiddle" alt=":-1:" class="emoji" src="./index/-1.png" title=":-1:"></img></div>
+		<div class="item" data-content="laugh"><img align="absmiddle" alt=":laughing:" class="emoji" src="./index/laughing.png" title=":laughing:"></img></div>
+		<div class="item" data-content="confused"><img align="absmiddle" alt=":confused:" class="emoji" src="./index/confused.png" title=":confused:"></img></div>
+		<div class="item" data-content="heart"><img align="absmiddle" alt=":heart:" class="emoji" src="./index/heart.png" title=":heart:"></img></div>
+		<div class="item" data-content="hooray"><img align="absmiddle" alt=":tada:" class="emoji" src="./index/tada.png" title=":tada:"></img></div>
+	</div>
+</div>
+
+
+								
+									<div class="item action">
+										<a class="edit-content" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#"><i class="octicon octicon-pencil"></i></a>
+									</div>
+								
+							</div>
+						
+					</div>
+					<div class="ui attached segment">
+						<div class="render-content markdown has-emoji">
+							
+								<p>feat(odds): flag apis swagger</p>
+
+							
+						</div>
+						<div class="raw-content hide">feat(odds): flag apis swagger</div>
+						<div class="edit-content-zone hide" data-write="issue-1526-write" data-preview="issue-1526-preview" data-update-url="/fsbs/go-mlm/issues/240/content" data-context="/fsbs/go-mlm"></div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+
+			
+
+
+
+
+	
+
+	
+	
+		<div class="event" id="issuecomment-9513">
+			<span class="octicon octicon-eye issue-symbol"></span>
+			<a class="ui avatar image" href="https://git.b5k.io/wayne.shen">
+				<img src="./index/avatar_default.png">
+			</a>
+			<span class="text grey"><a href="https://git.b5k.io/wayne.shen">wayne.shen</a>
+				
+					approved these changes <span class="time-since poping up" title="" data-content="2020/5/18 上午11:47:25" data-variation="inverted tiny">3 週之前</span>
+				
+			</span>
+			
+			
+		</div>
+	
+
+	
+
+	
+	
+		<div class="event" id="issuecomment-9518">
+			<span class="octicon octicon-eye issue-symbol"></span>
+			<a class="ui avatar image" href="https://git.b5k.io/kaiji.chang">
+				<img src="./index/avatar_default.png">
+			</a>
+			<span class="text grey"><a href="https://git.b5k.io/kaiji.chang">kaiji.chang</a>
+				
+					approved these changes <span class="time-since poping up" title="" data-content="2020/5/18 上午11:51:04" data-variation="inverted tiny">3 週之前</span>
+				
+			</span>
+			
+			
+		</div>
+	
+
+	
+
+	
+	
+		<div class="event">
+			<span class="octicon octicon-bookmark"></span>
+			<a class="ui avatar image" href="https://git.b5k.io/dave.gam">
+				<img src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+			</a>
+			<span class="text grey"><a href="https://git.b5k.io/dave.gam">dave.gam</a> 在代碼提交 <a id="event-9527" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#event-9527"><span class="time-since poping up" title="" data-content="2020/5/18 下午12:13:33" data-variation="inverted tiny">3 週之前</span></a> 中引用了該問題</span>
+
+			<div class="detail">
+				<span class="octicon octicon-git-commit"></span>
+				<span class="text grey"><a href="https://git.b5k.io/fsbs/go-mlm/commit/dc1d21695846bf565587d94702317d02506a47b1" rel="nofollow">feat(odds): flag apis swagger (#240)
+</a></span>
+			</div>
+		</div>
+	
+
+	
+
+	
+	
+		<div class="event">
+			<span class="octicon octicon-circle-slash issue-symbol"></span>
+			<a class="ui avatar image" href="https://git.b5k.io/dave.gam">
+				<img src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+			</a>
+			<span class="text grey"><a href="https://git.b5k.io/dave.gam">dave.gam</a> 於 <a id="event-9528" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#event-9528"><span class="time-since poping up" title="" data-content="2020/5/18 下午12:13:33" data-variation="inverted tiny">3 週之前</span></a> 關閉</span>
+		</div>
+	
+
+	
+
+	
+	
+		<div class="event">
+			<span class="octicon octicon-primitive-dot"></span>
+			<a class="ui avatar image" href="https://git.b5k.io/dave.gam">
+				<img src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+			</a>
+			<span class="text grey"><a href="https://git.b5k.io/dave.gam">dave.gam</a>
+			刪除分支 <b>feature/mlm_user_flags_swagger</b> <span class="time-since poping up" title="" data-content="2020/5/18 下午12:13:37" data-variation="inverted tiny">3 週之前</span>
+			</span>
+		</div>
+	
+
+
+
+			
+				
+	<div class="comment box">
+		<div class="content">
+			<div class="ui segment">
+				<h4>Reviewers</h4>
+				
+					
+					<div class="ui divider"></div>
+					<div class="review-item">
+						<span class="type-icon text green
+							">
+							<span class="octicon octicon-eye"></span>
+						</span>
+						<a class="ui avatar image" href="https://git.b5k.io/kaiji.chang">
+							<img src="./index/avatar_default.png">
+						</a>
+						<span class="text grey"><a href="https://git.b5k.io/kaiji.chang">kaiji.chang</a>
+							
+								approved these changes <span class="time-since poping up" title="" data-content="2020/5/18 上午11:51:04" data-variation="inverted tiny">3 週之前</span>
+							
+						</span>
+					</div>
+				
+					
+					<div class="ui divider"></div>
+					<div class="review-item">
+						<span class="type-icon text green
+							">
+							<span class="octicon octicon-eye"></span>
+						</span>
+						<a class="ui avatar image" href="https://git.b5k.io/wayne.shen">
+							<img src="./index/avatar_default.png">
+						</a>
+						<span class="text grey"><a href="https://git.b5k.io/wayne.shen">wayne.shen</a>
+							
+								approved these changes <span class="time-since poping up" title="" data-content="2020/5/18 上午11:47:25" data-variation="inverted tiny">3 週之前</span>
+							
+						</span>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+<div class="comment merge box">
+	<a class="avatar text
+	purple
+	"><span class="mega-octicon octicon-git-merge"></span></a>
+	<div class="content">
+		
+		<div class="ui top attached header">
+			
+				<div class="item text purple">
+					合併請求已合併。
+				</div>
+				
+			
+		</div>
+	</div>
+</div>
+
+			
+			
+				
+				<div class="comment form">
+					<a class="avatar" href="https://git.b5k.io/dave.gam">
+						<img src="./index/cc3dc2efb1d78f802555acc9fd9b66b3">
+					</a>
+					<div class="content">
+						<form class="ui segment form" id="comment-form" action="https://git.b5k.io/fsbs/go-mlm/issues/240/comments" method="post">
+							<div class="field">
+	<div class="ui top attached tabular menu" data-write="write" data-preview="preview">
+		<a class="active item" data-tab="write">Write</a>
+		<a class="item" data-tab="preview" data-url="https://git.b5k.io/api/v1/repos/fsbs/go-mlm/markdown" data-context="/fsbs/go-mlm">Preview</a>
+	</div>
+	<div class="ui bottom attached active tab segment" data-tab="write">
+		<textarea id="content" class="edit_area js-quick-submit" name="content" tabindex="4" data-id="issue-go-mlm" data-url="https://git.b5k.io/api/v1/repos/fsbs/go-mlm/markdown" data-context="" data-tribute="true"></textarea>
+	</div>
+	<div class="ui bottom attached tab segment markdown" data-tab="preview">
+		Loading…
+	</div>
+</div>
+
+	<div class="files"></div>
+	<div class="ui basic button dropzone dz-clickable" id="dropzone" data-upload-url="/attachments" data-accepts="image/jpeg,image/png,application/zip,application/gzip" data-max-file="5" data-max-size="4" data-default-message="拖放檔案或是點擊此處上傳。" data-invalid-input-type="您無法上傳此類型的檔案" data-file-too-big="檔案大小({{filesize}} MB) 超過了最大允許大小({{maxFilesize}} MB)" data-remove-file="移除文件"><div class="dz-default dz-message"><span>拖放檔案或是點擊此處上傳。</span></div></div>
+
+
+							<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+							<input id="status" name="status" type="hidden">
+							<div class="text right">
+								
+								<button class="ui green button" tabindex="5">
+									評論
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+			
+		</ui>
+	</div>
+
+	<div class="four wide column">
+	<div class="ui segment metas">
+		
+
+		<div class="ui  floating jump select-label dropdown" tabindex="0">
+			<span class="text">
+				<strong>標籤</strong>
+				<span class="octicon octicon-gear"></span>
+			</span>
+			<div class="filter menu" data-action="update" data-issue-id="1526" data-update-url="/fsbs/go-mlm/issues/labels" tabindex="-1">
+				<div class="no-select item">清除已選取標籤</div>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="8" data-id-selector="#label_8"><span class="octicon "></span><span class="label color" style="background-color: #ee0701"></span> bug
+					<br><small class="desc">Something is not working</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="9" data-id-selector="#label_9"><span class="octicon "></span><span class="label color" style="background-color: #cccccc"></span> duplicate
+					<br><small class="desc">This issue or pull request already exists</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="10" data-id-selector="#label_10"><span class="octicon "></span><span class="label color" style="background-color: #84b6eb"></span> enhancement
+					<br><small class="desc">New feature</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="11" data-id-selector="#label_11"><span class="octicon "></span><span class="label color" style="background-color: #128a0c"></span> help wanted
+					<br><small class="desc">Need some help</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="12" data-id-selector="#label_12"><span class="octicon "></span><span class="label color" style="background-color: #e6e6e6"></span> invalid
+					<br><small class="desc">Something is wrong</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="13" data-id-selector="#label_13"><span class="octicon "></span><span class="label color" style="background-color: #cc317c"></span> question
+					<br><small class="desc">More information is needed</small></a>
+				
+					<a class=" item has-emoji" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="14" data-id-selector="#label_14"><span class="octicon "></span><span class="label color" style="background-color: #ffffff"></span> wontfix
+					<br><small class="desc">This won't be fixed</small></a>
+				
+			</div>
+		</div>
+		<div class="ui labels list">
+			<span class="no-select item ">未選擇標籤</span>
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_8" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=8" style="color: #fff; background-color: #ee0701" title="Something is not working">bug</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_9" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=9" style="color: #000; background-color: #cccccc" title="This issue or pull request already exists">duplicate</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_10" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=10" style="color: #000; background-color: #84b6eb" title="New feature">enhancement</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_11" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=11" style="color: #fff; background-color: #128a0c" title="Need some help">help wanted</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_12" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=12" style="color: #000; background-color: #e6e6e6" title="Something is wrong">invalid</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_13" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=13" style="color: #fff; background-color: #cc317c" title="More information is needed">question</a>
+				</div>
+
+			
+				<div class="item">
+					<a class="ui label has-emoji hide" id="label_14" href="https://git.b5k.io/fsbs/go-mlm/issues?labels=14" style="color: #000; background-color: #ffffff" title="This won&#39;t be fixed">wontfix</a>
+				</div>
+
+			
+		</div>
+
+		<div class="ui divider"></div>
+
+		<div class="ui  floating jump select-milestone dropdown" tabindex="0">
+			<span class="text">
+				<strong>里程碑</strong>
+				<span class="octicon octicon-gear"></span>
+			</span>
+			<div class="menu" data-action="update" data-issue-id="1526" data-update-url="/fsbs/go-mlm/issues/milestone" tabindex="-1">
+				<div class="no-select item">清除已選取里程碑</div>
+				
+				
+			</div>
+		</div>
+		<div class="ui select-milestone list">
+			<span class="no-select item ">未選擇里程碑</span>
+			<div class="selected">
+				
+			</div>
+		</div>
+
+		<div class="ui divider"></div>
+
+		<input id="assignee_id" name="assignee_id" type="hidden" value="">
+		<div class="ui  floating jump select-assignees-modify dropdown" tabindex="0">
+			<span class="text">
+				<strong>指派成員</strong>
+				<span class="octicon octicon-gear"></span>
+			</span>
+			<div class="filter menu" data-action="" data-issue-id="1526" data-update-url="/fsbs/go-mlm/issues/assignee" tabindex="-1">
+				<div class="no-select item">取消指派成員</div>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="16" data-id-selector="#assignee_16">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/eb2642de8283ae4e344ae0d7d819dad9"> Willy
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="17" data-id-selector="#assignee_17">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/63214a4fca958a47e6215d6f98fdd7e6"> hunk
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="1" data-id-selector="#assignee_1">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/322a37bd30c7f5eac2815a6f6fc21cd6.jpeg"> mason.chu
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="10" data-id-selector="#assignee_10">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/b1ba9c080b440c0f231ab56829969c6e"> service
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="22" data-id-selector="#assignee_22">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/avatar_default.png"> Tom.hsu
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="38" data-id-selector="#assignee_38">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/cc3dc2efb1d78f802555acc9fd9b66b3"> dave.gam
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="45" data-id-selector="#assignee_45">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/14236389a884d5c59fe119804ada3252"> dylan.huang
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="8" data-id-selector="#assignee_8">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/avatar_default.png"> wayne.shen
+						</span>
+					</a>
+				
+
+					
+					<a class="item" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#" data-id="9" data-id-selector="#assignee_9">
+						<span class="octicon"></span>
+						<span class="text">
+							<img class="ui avatar image" src="./index/avatar_default.png"> kaiji.chang
+						</span>
+					</a>
+				
+			</div>
+		</div>
+		<div class="ui assignees list">
+			<span class="no-select item ">No Assignees</span>
+			<div class="selected">
+				
+			</div>
+		</div>
+
+		<div class="ui divider"></div>
+
+		<div class="ui participants">
+			<span class="text"><strong>1 參與者</strong></span>
+			<div>
+				
+					<a href="https://git.b5k.io/dave.gam">
+						<img class="ui avatar image poping up" src="./index/cc3dc2efb1d78f802555acc9fd9b66b3" data-content="dave.gam" data-position="top center" data-variation="small inverted">
+					</a>
+				
+			</div>
+		</div>
+
+		
+			<div class="ui divider"></div>
+
+			<div class="ui watching">
+				<span class="text"><strong>訊息</strong></span>
+				<div>
+					<form method="POST" action="https://git.b5k.io/fsbs/go-mlm/issues/240/watch">
+						<input type="hidden" name="watch" value="0">
+						<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+						<button class="fluid ui button">
+							
+								<i class="octicon octicon-mute"></i>
+								取消訂閱
+							
+						</button>
+					</form>
+				</div>
+			</div>
+		
+		
+			
+				<div class="ui divider"></div>
+				<div class="ui timetrack">
+					<span class="text"><strong>時間追蹤</strong></span>
+					<div>
+						<form method="POST" action="https://git.b5k.io/fsbs/go-mlm/issues/240/times/stopwatch/toggle" id="toggle_stopwatch_form">
+							<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+						</form>
+						<form method="POST" action="https://git.b5k.io/fsbs/go-mlm/issues/240/times/stopwatch/cancel" id="cancel_stopwatch_form">
+							<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+						</form>
+						
+							
+							<div class="ui buttons two fluid start-add">
+								<button onclick="this.disabled=true;toggleStopwatch()" class="ui button poping up start" data-content="開始時間追蹤" data-position="top center" data-variation="small inverted">開始</button>
+								<button onclick="timeAddManual()" class="ui button green poping up add-time" data-content="手動新增時間" data-position="top center" data-variation="small inverted">新增時間</button>
+								<div class="ui mini modal">
+									<div class="header">手動新增時間</div>
+									<div class="content">
+										<form method="POST" id="add_time_manual_form" action="https://git.b5k.io/fsbs/go-mlm/issues/240/times/add" class="ui action input fluid">
+											<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+											<input placeholder="小時" type="number" name="hours">
+											<input placeholder="分鐘" type="number" name="minutes" class="ui compact">
+										</form>
+									</div>
+									<div class="actions">
+										<div class="ui green approve button">新增時間</div>
+										<div class="ui red cancel button">取消</div>
+									</div>
+								</div>
+							</div>
+						
+					</div>
+				</div>
+			
+			
+		
+
+		<div class="ui divider"></div>
+		<span class="text"><strong>截止日期</strong></span>
+		<div class="ui form" id="deadline-loader">
+			<div class="ui negative message" id="deadline-err-invalid-date" style="display: none;">
+				<i class="close icon"></i>
+				The due date is invalid or out of range. Please use the format 'yyyy-mm-dd'.
+			</div>
+			
+				<p><i>未設定截止日期。</i></p>
+			
+
+			
+				<div id="deadlineForm">
+					<form class="ui fluid action input" action="https://git.b5k.io/api/v1/repos/fsbs/go-mlm/issues/240" method="post" id="update-issue-deadline-form" onsubmit="setDeadline();return false;">
+						<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+						<input required="" placeholder="yyyy年mm月dd日" type="date" name="deadlineDate" id="deadlineDate">
+						<button class="ui green icon button">
+							
+								<i class="plus icon"></i>
+							
+						</button>
+					</form>
+				</div>
+			
+		</div>
+
+		
+			<div class="ui divider"></div>
+
+			<div class="ui depending">
+				
+					<span class="text"><strong>Dependencies</strong></span>
+					<br>
+					<p>
+							This pull request currently doesn't have any dependencies.
+						</p>
+				
+
+				
+
+				
+
+				
+					<div>
+						<form method="POST" action="https://git.b5k.io/fsbs/go-mlm/issues/240/dependency/add" id="addDependencyForm">
+							<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+							<div class="ui fluid action input">
+								<div class="ui search selection dropdown" id="new-dependency-drop-list" data-issue-id="1526">
+									<input name="newDependency" type="hidden">
+									<i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+									<input type="text" class="search" tabindex="0">
+									<div class="default text">Add dependency…</div>
+								<div class="menu" tabindex="-1"></div></div>
+								<button class="ui green icon button">
+									<i class="plus icon"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				
+			</div>
+
+			
+
+	</div>
+</div>
+
+	<input type="hidden" id="repolink" value="fsbs/go-mlm">
+	
+	<input type="hidden" id="issueIndex" value="240">
+
+	<div class="ui basic modal remove-dependency">
+		<div class="ui icon header">
+			<i class="trash icon"></i>
+			Remove Dependency
+		</div>
+		<div class="content">
+			<form method="POST" action="https://git.b5k.io/fsbs/go-mlm/issues/240/dependency/delete" id="removeDependencyForm">
+				<input type="hidden" name="_csrf" value="5G3fTaue2NNrZN9Gt7EUtn6f4Bc6MTU5MTYyODAzOTM5Njk0OTQ4NA==">
+				<input type="hidden" value="" name="removeDependencyID" id="removeDependencyID">
+				<input type="hidden" value="" name="dependencyType" id="dependencyType">
+			</form>
+			<p>
+				This will remove the dependency from this pull request. Continue?
+			</p>
+		</div>
+		<div class="actions">
+			<div class="ui basic red cancel inverted button">
+				<i class="remove icon"></i>
+				Cancel
+			</div>
+			<div class="ui basic green ok inverted button">
+				<i class="checkmark icon"></i>
+				Remove
+			</div>
+		</div>
+	</div>
+
+		
+
+</div>
+
+<div class="hide" id="edit-content-form">
+	<div class="ui comment form">
+		<div class="ui top attached tabular menu">
+			<a class="active write item">Write</a>
+			<a class="preview item" data-url="https://git.b5k.io/api/v1/repos/fsbs/go-mlm/markdown" data-context="/fsbs/go-mlm">Preview</a>
+		</div>
+		<div class="ui bottom attached active write tab segment">
+			<textarea tabindex="1" name="content"></textarea>
+		</div>
+		<div class="ui bottom attached tab preview segment markdown">
+			Loading…
+		</div>
+		<div class="text right edit buttons">
+			<div class="ui basic blue cancel button" tabindex="3">取消</div>
+			<div class="ui green save button" tabindex="2">儲存</div>
+		</div>
+	</div>
+</div>
+
+<div class="hide" id="no-content">
+	<span class="no-content">尚未有任何內容</span>
+</div>
+
+<div class="ui small basic delete modal">
+	<div class="ui icon header">
+		<i class="trash icon"></i>
+		刪除分支 'feature/mlm_user_flags_swagger'
+	</div>
+	<div class="content">
+		<p>刪除分支是永久的。 此動作<strong>無法</strong>復原，繼續？</p>
+	</div>
+	<div class="actions">
+	<div class="ui red basic inverted cancel button">
+		<i class="remove icon"></i>
+		取消操作
+	</div>
+	<div class="ui green basic inverted ok button">
+		<i class="checkmark icon"></i>
+		確認操作
+	</div>
+</div>
+
+</div>
+
+			</div>
+		
+	</div>
+</div>
+
+
+	
+
+	</div>
+
+	
+
+	<footer>
+	<div class="ui container">
+		<div class="ui left">
+			© Gitea 版本: 1.9.3 頁面: <strong>441ms</strong> 樣板: <strong>70ms</strong>
+		</div>
+		<div class="ui right links">
+			
+			<div class="ui language bottom floating slide up dropdown link item" tabindex="0">
+				<i class="world icon"></i>
+				<div class="text">繁體中文（台灣）</div>
+				<div class="menu" tabindex="-1">
+					
+						<a lang="zh-TW" class="item active selected" href="https://git.b5k.io/fsbs/go-mlm/pulls/240#">繁體中文（台灣）</a>
+					
+						<a lang="en-US" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=en-US">English</a>
+					
+						<a lang="zh-CN" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=zh-CN">简体中文</a>
+					
+						<a lang="zh-HK" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=zh-HK">繁體中文（香港）</a>
+					
+						<a lang="de-DE" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=de-DE">Deutsch</a>
+					
+						<a lang="fr-FR" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=fr-FR">français</a>
+					
+						<a lang="nl-NL" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=nl-NL">Nederlands</a>
+					
+						<a lang="lv-LV" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=lv-LV">latviešu</a>
+					
+						<a lang="ru-RU" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=ru-RU">русский</a>
+					
+						<a lang="uk-UA" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=uk-UA">Українська</a>
+					
+						<a lang="ja-JP" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=ja-JP">日本語</a>
+					
+						<a lang="es-ES" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=es-ES">español</a>
+					
+						<a lang="pt-BR" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=pt-BR">português do Brasil</a>
+					
+						<a lang="pl-PL" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=pl-PL">polski</a>
+					
+						<a lang="bg-BG" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=bg-BG">български</a>
+					
+						<a lang="it-IT" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=it-IT">italiano</a>
+					
+						<a lang="fi-FI" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=fi-FI">suomi</a>
+					
+						<a lang="tr-TR" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=tr-TR">Türkçe</a>
+					
+						<a lang="cs-CZ" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=cs-CZ">čeština</a>
+					
+						<a lang="sr-SP" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=sr-SP">српски</a>
+					
+						<a lang="sv-SE" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=sv-SE">svenska</a>
+					
+						<a lang="ko-KR" class="item " href="https://git.b5k.io/fsbs/go-mlm/pulls/240?lang=ko-KR">한국어</a>
+					
+				</div>
+			</div>
+			<a href="https://git.b5k.io/vendor/librejs.html" data-jslicense="1">JavaScript licenses</a>
+			<a href="https://git.b5k.io/api/swagger">API</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://gitea.io/">網站</a>
+			<span class="version">Go1.12.9</span>
+		</div>
+	</div>
+</footer>
+
+
+	<script src="./index/jquery.min.js.下載"></script>
+	<script src="./index/jquery-migrate.min.js.下載"></script>
+	<script src="./index/jquery.are-you-sure.js.下載"></script>
+
+
+
+
+
+	<script src="./index/highlight.pack.js.下載"></script>
+
+
+
+
+	<script src="./index/dropzone.js.下載"></script>
+
+
+
+
+	<script src="./index/tribute.min.js.下載"></script>
+	<script>
+		var issuesTribute = new Tribute({
+			values: [
+			
+			{key: 'Willy ', value: 'Willy',
+			name: 'Willy', fullname: '', avatar: 'https:\/\/secure.gravatar.com\/avatar\/eb2642de8283ae4e344ae0d7d819dad9?d=identicon'},
+			
+			{key: 'hunk ', value: 'hunk',
+			name: 'hunk', fullname: '', avatar: 'https:\/\/secure.gravatar.com\/avatar\/63214a4fca958a47e6215d6f98fdd7e6?d=identicon'},
+			
+			{key: 'mason.chu ', value: 'mason.chu',
+			name: 'mason.chu', fullname: '', avatar: 'https:\/\/secure.gravatar.com\/avatar\/322a37bd30c7f5eac2815a6f6fc21cd6?d=identicon'},
+			
+			{key: 'service ', value: 'service',
+			name: 'service', fullname: '', avatar: 'https:\/\/secure.gravatar.com\/avatar\/b1ba9c080b440c0f231ab56829969c6e?d=identicon'},
+			
+			{key: 'Tom.hsu ', value: 'Tom.hsu',
+			name: 'Tom.hsu', fullname: '', avatar: '\/img\/avatar_default.png'},
+			
+			{key: 'dave.gam ', value: 'dave.gam',
+			name: 'dave.gam', fullname: '', avatar: '\/avatars\/cc3dc2efb1d78f802555acc9fd9b66b3'},
+			
+			{key: 'dylan.huang ', value: 'dylan.huang',
+			name: 'dylan.huang', fullname: '', avatar: 'https:\/\/secure.gravatar.com\/avatar\/14236389a884d5c59fe119804ada3252?d=identicon'},
+			
+			{key: 'wayne.shen ', value: 'wayne.shen',
+			name: 'wayne.shen', fullname: '', avatar: '\/img\/avatar_default.png'},
+			
+			{key: 'kaiji.chang ', value: 'kaiji.chang',
+			name: 'kaiji.chang', fullname: '', avatar: '\/img\/avatar_default.png'},
+			
+			],
+			noMatchTemplate: function () { return null },
+			menuItemTemplate: function (item) {
+				var user = item.original;
+				var itemStr = '<img src="' + user.avatar + '"/><span class="name">' + user.name + '</span>';
+				if (user.fullname && user.fullname != '') {
+					itemStr += '<span class="fullname">' + user.fullname + '</span>';
+				}
+				return itemStr;
+			}
+		});
+		var content = document.getElementById('content');
+		if (content != null) {
+			issuesTribute.attach(content);
+		}
+	</script>
+	<script>
+		var emojiTribute = new Tribute({
+			collection: [{
+				trigger: ':',
+				requireLeadingSpace: true,
+				values: function (text, cb) {
+					var array = emojify.emojiNames;
+					var data = [];
+					for(var j=0; j<array.length; j++) {
+						if(array[j].indexOf(text) !== -1) {
+							data.push(array[j]);
+							if(data.length > 5) {
+								break;
+							}
+						}
+					}
+					cb(data);
+				},
+				lookup: function (item) {
+					return item;
+				},
+				selectTemplate: function (item) {
+					if (typeof item === 'undefined') return null;
+					return ':' + item.original + ':';
+				},
+				menuItemTemplate: function (item) {
+					return '<img class="emoji" src="/vendor/plugins/emojify/images/' + item.original + '.png"/>' + item.original;
+				}
+			}]
+		});
+		var emojiInputs = document.querySelectorAll('.emoji-input');
+		if (emojiInputs.length > 0) {
+			emojiTribute.attach(emojiInputs);
+		}
+		var content = document.getElementById('content');
+		if (content != null) {
+			emojiTribute.attach(document.getElementById('content'));
+		}
+	</script>
+
+	<script src="./index/emojify.min.js.下載"></script>
+	<script src="./index/clipboard.min.js.下載"></script>
+	<script src="./index/vue.min.js.下載"></script>
+
+	
+	<script src="./index/semantic.min.js.下載"></script>
+	<script src="./index/index.js.下載"></script>
+
+
+
+
+
+<input type="file" multiple="multiple" class="dz-hidden-input" accept="image/jpeg,image/png,application/zip,application/gzip" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"></body></html>
